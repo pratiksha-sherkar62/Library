@@ -1,0 +1,22 @@
+/* src/pages/Login.css */
+
+.login-container {
+  background: linear-gradient(135deg, #74ebd5, #9face6);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  background-color: #fff;
+}
+.register-container {
+  background: linear-gradient(to right, #f2f2f2, #e6f7ff);
+  height: 100vh;
+  padding: 20px;
+}
+
+.register-card {
+  border-radius: 15px;
+}
+
