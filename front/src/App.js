@@ -31,7 +31,7 @@ function AppContent() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add-book" element={<AddBook addBook={addBook} />} />
         <Route path="/books" element={<BookList books={books} />} />
-        <Route path="/studentreg" element={<StudentReg />} />
+        {/* <Route path="/studentreg" element={<StudentReg />} /> */}
         {/* इतर routes */}
       </Routes>
     </>
