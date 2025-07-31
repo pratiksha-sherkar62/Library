@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Navbar from './components/navbar';
 import BookList from './features/books/BookList';
 import AddBook from './features/books/AddBook';
+import StaffReg from './pages/StaffReg';
 
 function AppContent() {
   const location = useLocation(); // सध्याचा URL कळवतो
@@ -31,6 +32,7 @@ function AppContent() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add-book" element={<AddBook addBook={addBook} />} />
         <Route path="/books" element={<BookList books={books} />} />
+        <Route path="/staffreg" element={<StaffReg />} />
         {/* <Route path="/studentreg" element={<StudentReg />} /> */}
         {/* इतर routes */}
       </Routes>
