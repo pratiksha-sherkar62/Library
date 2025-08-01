@@ -4,13 +4,20 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Navbar from './components/navbar';
+
 import BookList from './features/books/BookList';
 import AddBook from './features/books/AddBook';
-import StaffReg from './pages/StaffReg';
+
+import StaffReg from './features/Member/StaffReg';
+import StudentRegistration from './features/Member/StudentReg';
+import MemberList from './features/Member/MemberList';
 
 function AppContent() {
-  const location = useLocation(); // सध्याचा URL कळवतो
+  const location = useLocation();
   const [books, setBooks] = useState([]);
+
+  const [students, setStudents] = useState([]);
+  const [staffs, setStaffs] = useState([]);
 
   const addBook = (book) => {
     const newBook = {
@@ -20,21 +27,32 @@ function AppContent() {
     setBooks([...books, newBook]);
   };
 
-  // जर सध्याचा route '/', '/register' असेल तर Navbar दाखवायचा नाही
+  const handleStudentRegister = (studentData) => {
+    setStudents([...students, studentData]);
+  };
+
+  const handleStaffRegister = (staffData) => {
+    setStaffs([...staffs, staffData]);
+  };
+
   const hideNavbar = location.pathname === '/' || location.pathname === '/register';
 
   return (
     <>
-       {!hideNavbar && <Navbar />} {/*बाकी पानांवर Navbar दाखवा */}
+      {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add-book" element={<AddBook addBook={addBook} />} />
         <Route path="/books" element={<BookList books={books} />} />
-        <Route path="/staffreg" element={<StaffReg />} />
-        {/* <Route path="/studentreg" element={<StudentReg />} /> */}
-        {/* इतर routes */}
+
+        {/* ✅ Pass registration functions as props */}
+        <Route path="/staffreg" element={<StaffReg onRegister={handleStaffRegister} />} />
+        <Route path="/studentreg" element={<StudentRegistration onRegister={handleStudentRegister} />} />
+
+        {/* ✅ Pass student and staff data as props */}
+        <Route path="/members" element={<MemberList students={students} staffs={staffs} />} />
       </Routes>
     </>
   );

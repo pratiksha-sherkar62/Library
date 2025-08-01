@@ -31,7 +31,7 @@ function BookList({ books }) {
                       <td>{book.year}</td>
                       <td>{book.quantity}</td>
                       <td>
-                        {book.status === 'available' ? (
+                        {book.status === 'Available' ? (
                           <span className="badge bg-success">Available</span>
                         ) : (
                           <span className="badge bg-danger">Not Available</span>

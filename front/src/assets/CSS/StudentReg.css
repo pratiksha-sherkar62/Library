@@ -1,21 +1,34 @@
-.container mt-5
-{
-    background-color: rgb(171, 56, 41);
+/* studentRegistration.css */
+
+.registration-form {
+  max-width: 600px;
+  margin: auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 94, 245, 0.3);
 }
 
-
-.custom-radio:checked {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+.registration-form h2 {
+  color: #005ef5;
+  font-weight: bold;
 }
 
-.custom-radio {
-  cursor: pointer;
-  accent-color: #0d6efd; /* works in modern browsers */
-}
-
-.form-check-label {
-  margin-right: 15px;
+.registration-form label {
   font-weight: 500;
-  color: #333;
+}
+
+.registration-form input {
+  border-radius: 8px;
+}
+
+.registration-form button {
+  border-radius: 8px;
+  background-color: #005ef5;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.registration-form button:hover {
+  background-color: #0041a8;
 }

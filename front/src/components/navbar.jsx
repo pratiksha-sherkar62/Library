@@ -32,15 +32,15 @@ const Navbar = () => {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{ fontSize: '18px' }}>
-            <li className="nav-item" style={{ color: "white", fontSize: "40px" }}>
+            <li className="nav-item me-3" style={{ color: "white", fontSize: "40px" }}>
               Dashboard
             </li>
 
-            <li className="nav-item">
+            <li className="nav-item me-3">
               <Link className="nav-link" to="/add-book">Add Book</Link>
             </li>
 
-            <li className="nav-item dropdown">
+            <li className="nav-item dropdown me-3">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -51,20 +51,22 @@ const Navbar = () => {
                 Registration
               </a>
               <ul className="dropdown-menu" aria-labelledby="registrationDropdown">
-                <li><a className="dropdown-item" href="#">Student Registration</a></li>
-                <li><Link to="/stffreg">Staff Registration</Link></li>
+                <li><Link className="dropdown-item" to="/studentreg">Student Registration</Link></li>
+                <li><Link className="dropdown-item" to="/staffreg">Staff Registration</Link></li>
               </ul>
             </li>
 
-            <li className="nav-item">
+            <li className="nav-item me-3">
               <Link className="nav-link" to="/books">Book List</Link>
+            </li>
+
+            <li className="nav-item me-3">
+              <Link className="nav-link" to="/members">Memeber List</Link>
             </li>
           </ul>
 
           <div className="d-lg-flex align-items-center gap-2 ms-auto text-center w-100 justify-content-lg-end">
-            <button>
-              Log Out
-            </button>
+            <button className="btn btn-outline-light">Log Out</button>
           </div>
         </div>
       </div>
