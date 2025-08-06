@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export default class  Home extends React.Component{
 
     render() {
+       
         return (
         <>
         <div className="home-container d-flex justify-content-center align-items-center vh-20" style={{backgroundColor: '#005ef5ff', padding: '20px'}}>
@@ -38,7 +39,29 @@ export default class  Home extends React.Component{
             </li>
             
             </ul>
-             
+             <div className="d-flex align-items-center gap-3 ms-auto">
+  <button
+    className="btn btn-outline-light"
+  
+  >
+    Admin Login
+  </button>
+
+  <button
+    className="btn btn-outline-light"
+    
+  >
+    Staff Login
+  </button>
+
+  <button
+    className="btn btn-light text-primary"
+   
+  >
+   Student Login
+  </button>
+</div>
+
             </div>
         </>
         );
