@@ -9,38 +9,48 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark" style={{ height: '100px', backgroundColor: '#005ef5ff' }}>
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="#">
-          <img
-            src="https://www.creativefabrica.com/wp-content/uploads/2020/09/17/Book-Logo-Graphics-5535886-1.jpg"
-            alt="Book Logo"
-            width="90px"
-            height="80px"
-            className="d-inline-block align-text-top"
-          />
-        </Link>
-
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
+    <nav className="navbar navbar-expand-lg navbar-dark" style={{ height: '100px', backgroundColor: '#005ef5ff',padding: '20px' }}>
+      
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{ fontSize: '18px' }}>
-            <li className="nav-item me-3" style={{ color: "white", fontSize: "40px" }}>
-              Dashboard
-            </li>
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{ fontSize: '18px',alignItems: 'center'}}>
 
-            <li className="nav-item me-3">
-              <Link className="nav-link" to="/add-book">Add Book</Link>
-            </li>
 
-            <li className="nav-item dropdown me-3">
+            
+            <li className="nav-item">
+  <Link
+    className="nav-link text-white"
+    to="/library"
+    style={{
+      whiteSpace: 'nowrap',
+      fontSize: '20px',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '8px'
+    }}
+  >
+    <img
+      src="/book.png"
+      alt="Book Logo"
+      width="40"
+      height="40"
+      style={{ objectFit: 'contain' }}
+    />
+    My Library
+  </Link>
+</li>
+
+
+            <li className="nav-item ms-5">
+  <Link
+    className="nav-link"
+    to="/add-book"
+    style={{ whiteSpace: 'nowrap', fontSize: '18px' }}
+  >
+    Add Book
+  </Link>
+</li>
+
+            <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -51,25 +61,36 @@ const Navbar = () => {
                 Registration
               </a>
               <ul className="dropdown-menu" aria-labelledby="registrationDropdown">
-                <li><Link className="dropdown-item" to="/studentreg">Student Registration</Link></li>
-                <li><Link className="dropdown-item" to="/staffreg">Staff Registration</Link></li>
+                <li><a className="dropdown-item" href="/staffreg">Staff Registration</a></li>
+                 <li><a className="dropdown-item" href="/studentreg">Student Registration</a></li>
               </ul>
             </li>
 
-            <li className="nav-item me-3">
-              <Link className="nav-link" to="/books">Book List</Link>
-            </li>
+            <li className="nav-item">
+  <Link
+    className="nav-link"
+    to="/books"
+    style={{ whiteSpace: 'nowrap', fontSize: '18px' }}
+  >
+    Book List
+  </Link>
+</li>
 
-            <li className="nav-item me-3">
-              <Link className="nav-link" to="/members">Memeber List</Link>
-            </li>
-          </ul>
+      </ul>    
 
-          <div className="d-lg-flex align-items-center gap-2 ms-auto text-center w-100 justify-content-lg-end">
-            <button className="btn btn-outline-light">Log Out</button>
-          </div>
+          <button
+  className="btn btn-outline-light mr-2"
+  onClick={() => {
+    // Add logout logic here
+    navigate('/');
+  }}
+>
+  Log Out
+</button>
+
+          
         </div>
-      </div>
+    
     </nav>
   );
 };

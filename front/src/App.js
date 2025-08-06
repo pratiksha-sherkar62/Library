@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // for navbar dropdown etc.
+
+
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -11,6 +16,9 @@ import AddBook from './features/books/AddBook';
 import StaffReg from './features/Member/StaffReg';
 import StudentRegistration from './features/Member/StudentReg';
 import MemberList from './features/Member/MemberList';
+
+import Home from './pages/Home';
+import Footer from './components/Footer';
 
 function AppContent() {
   const location = useLocation();
@@ -35,15 +43,15 @@ function AppContent() {
     setStaffs([...staffs, staffData]);
   };
 
-  const hideNavbar = location.pathname === '/' || location.pathname === '/register';
-
+  const hideNavbar = location.pathname === '/' || location.pathname === '/register' || location.pathname === '/home';
   return (
     <>
       {!hideNavbar && <Navbar />}
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        
         <Route path="/add-book" element={<AddBook addBook={addBook} />} />
         <Route path="/books" element={<BookList books={books} />} />
 
@@ -53,6 +61,7 @@ function AppContent() {
 
         {/* ✅ Pass student and staff data as props */}
         <Route path="/members" element={<MemberList students={students} staffs={staffs} />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </>
   );
@@ -62,8 +71,15 @@ function App() {
   return (
     <Router>
       <AppContent />
+      <div className="d-flex flex-column min-vh-100">
+      {/* Other components like Header, Routes, etc. */}
+      
+      <Footer />
+    </div>
     </Router>
   );
 }
+
+
 
 export default App;
