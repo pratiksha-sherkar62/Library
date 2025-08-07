@@ -42,16 +42,14 @@ export default class  Home extends React.Component{
              <div className="d-flex align-items-center gap-3 ms-auto">
   <button
     className="btn btn-outline-light"
-  
-  >
-    Admin Login
+  ><Link to="/login">Admin Login</Link>
   </button>
 
   <button
     className="btn btn-outline-light"
     
-  >
-    Staff Login
+  ><Link to="/login"> Staff Login</Link>
+   
   </button>
 
   <button

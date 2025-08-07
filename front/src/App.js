@@ -43,7 +43,7 @@ function AppContent() {
     setStaffs([...staffs, staffData]);
   };
 
-  const hideNavbar = location.pathname === '/' || location.pathname === '/register' || location.pathname === '/home';
+  const hideNavbar = location.pathname === '/' || location.pathname === '/register' || location.pathname === '/home' || location.pathname === '/login';
   return (
     <>
       {!hideNavbar && <Navbar />}

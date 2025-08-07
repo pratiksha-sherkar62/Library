@@ -47,9 +47,9 @@ function Login() {
           <div className="d-grid mb-3">
             <button type="submit" className="btn btn-primary">Login</button>
           </div>
-          <p className="text-center">
+          {/* <p className="text-center">
             Don’t have an account? <Link to="/register">Register</Link>
-          </p>
+          </p> */}
         </form>
       </div>
     </div>

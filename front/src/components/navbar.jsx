@@ -75,6 +75,15 @@ const Navbar = () => {
     Book List
   </Link>
 </li>
+            <li className="nav-item">
+            <Link
+              className="nav-link"
+              to="/Members"
+              style={{ whiteSpace: 'nowrap', fontSize: '18px' }}
+            >
+             Member List
+            </Link>
+            </li>
 
       </ul>    
 
