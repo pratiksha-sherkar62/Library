@@ -51,7 +51,7 @@ export default class  Home extends React.Component{
   </button>
 
   <button className="btn btn-light text-primary">
-    <Link to="/userReg" style={{ textDecoration: 'none', color: 'inherit' }}>
+    <Link to="/UserLogin" style={{ textDecoration: 'none', color: 'inherit' }}>
       User Login
     </Link>
   </button>

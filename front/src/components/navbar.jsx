@@ -17,38 +17,21 @@ const Navbar = () => {
 
             
             <li className="nav-item">
-  <Link
-    className="nav-link text-white"
-    to="/library"
+            <Link className="nav-link text-white" to="/library"
     style={{
       whiteSpace: 'nowrap',
       fontSize: '20px',
       display: 'inline-flex',
       alignItems: 'center',
       gap: '8px'
-    }}
-  >
-    <img
-      src="/book.png"
-      alt="Book Logo"
-      width="40"
-      height="40"
-      style={{ objectFit: 'contain' }}
-    />
-    My Library
-  </Link>
+    }}>
+    <img src="/book.png" alt="Book Logo" width="40" height="40" style={{ objectFit: 'contain' }}/>
+    My Library </Link>
 </li>
 
 
-            <li className="nav-item ms-5">
-  <Link
-    className="nav-link"
-    to="/add-book"
-    style={{ whiteSpace: 'nowrap', fontSize: '18px' }}
-  >
-    Add Book
-  </Link>
-</li>
+            <li className="nav-item ms-5"> <Link className="nav-link" to="/Dashboard" style={{ whiteSpace: 'nowrap', fontSize: '18px' }}> DashBoard </Link></li>
+            <li className="nav-item ms-5"> <Link className="nav-link" to="/add-book" style={{ whiteSpace: 'nowrap', fontSize: '18px' }}> Add Book </Link></li>
 
             <li className="nav-item dropdown">
               <a

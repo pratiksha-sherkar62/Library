@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../assets/CSS/Style.css';
 
 function Login() {
   const navigate = useNavigate();
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Dummy admin check
     if (username === 'admin' && password === 'admin') {
-      navigate('/dashboard'); // Redirect to Dashboard
+      alert('Admin login successful!');
+      navigate('/dashboard'); // 👈 Admin redirected to dashboard
     } else {
       alert('Invalid credentials. Try admin/admin');
     }
@@ -47,9 +46,6 @@ function Login() {
           <div className="d-grid mb-3">
             <button type="submit" className="btn btn-primary">Login</button>
           </div>
-          {/* <p className="text-center">
-            Don’t have an account? <Link to="/register">Register</Link>
-          </p> */}
         </form>
       </div>
     </div>

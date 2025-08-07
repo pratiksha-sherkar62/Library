@@ -11,9 +11,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import Login from './pages/Login';
 import Register from './pages/Register';
-import UserReg from './pages/userReg'; // ✅ capitalized
+import UserLogin from './pages/Userlog';
 import Dashboard from './pages/Dashboard';
+
 import Navbar from './components/navbar';
+import Sidebar from './components/sidebar';
+
+import Userhome from './pages/UserHome';
 
 import BookList from './features/books/BookList';
 import AddBook from './features/books/AddBook';
@@ -48,13 +52,17 @@ function AppContent() {
     setStaffs([...staffs, staffData]);
   };
 
-  const hideNavbar = ['/login', '/register', '/userReg', '/home', '/'].includes(location.pathname);
-  const hideFooter = ['/login', '/register', '/userReg', '/home', '/'].includes(location.pathname);
+  // Navigation visibility controls
+  const path = location.pathname;
+  const hideNavbar = ['/login', '/register', '/userReg', '/home', '/', '/userhome'].includes(path);
+  const hideFooter = ['/login', '/register', '/userReg', '/home', '/'].includes(path);
+  const showSidebar = path === '/userhome'; // Show sidebar only on UserHome
 
   return (
     <>
       {!hideNavbar && <Navbar />}
-      
+      {showSidebar && <Sidebar />}
+
       <Routes>
         <Route
           path="/dashboard"
@@ -62,7 +70,7 @@ function AppContent() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/userReg" element={<UserReg />} />
+        <Route path="/Userlog" element={<UserLogin />} />
 
         <Route path="/add-book" element={<AddBook addBook={addBook} />} />
         <Route path="/books" element={<BookList books={books} />} />
@@ -72,6 +80,7 @@ function AppContent() {
 
         <Route path="/members" element={<MemberList students={students} staffs={staffs} />} />
         <Route path="/" element={<Home />} />
+        <Route path="/userhome" element={<Userhome />} />
       </Routes>
 
       {!hideFooter && <Footer />}
