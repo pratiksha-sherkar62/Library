@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 import { Link, useNavigate } from 'react-router-dom';
+import '../assets/CSS/home.css';
 
 export default class  Home extends React.Component{
 
@@ -8,6 +9,9 @@ export default class  Home extends React.Component{
        
         return (
         <>
+        <div className="bg-image">
+
+
         <div className="home-container d-flex justify-content-center align-items-center vh-20" style={{backgroundColor: '#005ef5ff', padding: '20px'}}>
             
             
@@ -40,22 +44,22 @@ export default class  Home extends React.Component{
             
             </ul>
              <div className="d-flex align-items-center gap-3 ms-auto">
-  <button
-    className="btn btn-outline-light"
-  ><Link to="/login">Admin Login</Link>
+  <button className="btn btn-outline-light">
+    <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
+      Admin Login
+    </Link>
   </button>
 
-  {/* <button
-    className="btn btn-outline-light"
-    
-  ><Link to="/user"> Staff Login</Link>
-   
-  </button> */}
-
-  <button className="btn btn-light text-primary"><Link to="/userReg">User</Link></button>
+  <button className="btn btn-light text-primary">
+    <Link to="/userReg" style={{ textDecoration: 'none', color: 'inherit' }}>
+      User Login
+    </Link>
+  </button>
 </div>
 
-            </div>
+        </div>
+
+        </div>
         </>
         );
     }
