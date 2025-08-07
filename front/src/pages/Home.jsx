@@ -45,19 +45,14 @@ export default class  Home extends React.Component{
   ><Link to="/login">Admin Login</Link>
   </button>
 
-  <button
+  {/* <button
     className="btn btn-outline-light"
     
-  ><Link to="/login"> Staff Login</Link>
+  ><Link to="/user"> Staff Login</Link>
    
-  </button>
+  </button> */}
 
-  <button
-    className="btn btn-light text-primary"
-   
-  >
-   Student Login
-  </button>
+  <button className="btn btn-light text-primary"><Link to="/userReg">User</Link></button>
 </div>
 
             </div>

@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // for navbar dropdown etc.
-
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import Login from './pages/Login';
 import Register from './pages/Register';
+import UserReg from './pages/userReg'; // ✅ capitalized
 import Dashboard from './pages/Dashboard';
 import Navbar from './components/navbar';
 
@@ -22,8 +27,8 @@ import Footer from './components/Footer';
 
 function AppContent() {
   const location = useLocation();
-  const [books, setBooks] = useState([]);
 
+  const [books, setBooks] = useState([]);
   const [students, setStudents] = useState([]);
   const [staffs, setStaffs] = useState([]);
 
@@ -43,26 +48,33 @@ function AppContent() {
     setStaffs([...staffs, staffData]);
   };
 
-  const hideNavbar = location.pathname === '/' || location.pathname === '/register' || location.pathname === '/home' || location.pathname === '/login';
+  const hideNavbar = ['/login', '/register', '/userReg', '/home', '/'].includes(location.pathname);
+  const hideFooter = ['/login', '/register', '/userReg', '/home', '/'].includes(location.pathname);
+
   return (
     <>
       {!hideNavbar && <Navbar />}
+      
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={<Dashboard books={books} students={students} staffs={staffs} />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
+        <Route path="/userReg" element={<UserReg />} />
+
         <Route path="/add-book" element={<AddBook addBook={addBook} />} />
         <Route path="/books" element={<BookList books={books} />} />
 
-        {/* ✅ Pass registration functions as props */}
         <Route path="/staffreg" element={<StaffReg onRegister={handleStaffRegister} />} />
         <Route path="/studentreg" element={<StudentRegistration onRegister={handleStudentRegister} />} />
 
-        {/* ✅ Pass student and staff data as props */}
         <Route path="/members" element={<MemberList students={students} staffs={staffs} />} />
         <Route path="/" element={<Home />} />
       </Routes>
+
+      {!hideFooter && <Footer />}
     </>
   );
 }
@@ -70,16 +82,11 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AppContent />
       <div className="d-flex flex-column min-vh-100">
-      {/* Other components like Header, Routes, etc. */}
-      
-      <Footer />
-    </div>
+        <AppContent />
+      </div>
     </Router>
   );
 }
-
-
 
 export default App;
