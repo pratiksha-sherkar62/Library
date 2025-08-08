@@ -1,26 +1,53 @@
 import React from 'react';
-import  '../assets/CSS/sidebar.css';// Custom styles
+import { Link, useLocation } from 'react-router-dom';
+import '../assets/CSS/sidebar.css';
+import {
+  FaHome,
+  FaUser,
+  FaSearch,
+  FaHeart,
+  FaBook,
+  FaUndo,
+  FaBell,
+  FaSignOutAlt
+} from 'react-icons/fa';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, toggleSidebar }) => {
+  const location = useLocation();
+
+  const menuItems = [
+    { path: '/userhome', label: 'Home', icon: <FaHome /> },
+    { path: '/profile', label: 'My Profile', icon: <FaUser /> },
+    { path: '/search-books', label: 'Search Books', icon: <FaSearch /> },
+    { path: '/favorites', label: 'Favorites', icon: <FaHeart /> },
+    { path: '/book-issue', label: 'Book Issue', icon: <FaBook /> },
+    { path: '/book-return', label: 'Book Return', icon: <FaUndo /> },
+    { path: '/notifications', label: 'Notification', icon: <FaBell /> },
+    { path: '/', label: 'Logout', icon: <FaSignOutAlt />, danger: true },
+  ];
+
   return (
-    <div className="sidebar d-flex flex-column p-3 bg-light">
-      <h4 className="text-primary">📚 Library</h4>
+    <div className={`sidebar bg-light p-3 ${isOpen ? 'open' : 'closed'}`}>
+      <button className="btn btn-primary mb-3 w-100" onClick={toggleSidebar}>
+        {isOpen ? 'Hide Sidebar' : 'Show Sidebar'}
+      </button>
+
+      {isOpen && <h4 className="text-primary">📚 Library</h4>}
+
       <ul className="nav nav-pills flex-column mb-auto mt-4">
-        <li className="nav-item">
-          <a href="/dashboard" className="nav-link active">Dashboard</a>
-        </li>
-        <li>
-          <a href="/books" className="nav-link">Book List</a>
-        </li>
-        <li>
-          <a href="/members" className="nav-link">Member List</a>
-        </li>
-        <li>
-          <a href="/profile" className="nav-link">My Profile</a>
-        </li>
-        <li>
-          <a href="/logout" className="nav-link text-danger">Logout</a>
-        </li>
+        {menuItems.map((item, index) => (
+          <li key={index}>
+            <Link
+              to={item.path}
+              className={`nav-link d-flex align-items-center 
+                ${item.danger ? 'text-danger' : ''} 
+                ${location.pathname === item.path ? 'active' : ''}`}
+            >
+              <span className="me-2">{item.icon}</span>
+              {isOpen && item.label}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );

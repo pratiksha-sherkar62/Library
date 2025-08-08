@@ -1,13 +1,16 @@
-import React from 'react';
-import Sidebar from '../components/sidebar'; // adjust path if needed
+import React from "react";
+import Sidebar from "../components/sidebar";
 
 const UserHome = () => {
   return (
-    <div className="d-flex">
+    <div style={{ display: "flex" }}>
+      {/* Sidebar only once */}
       <Sidebar />
-      <div className="p-4 w-100">
-        <h2>ok................................................ddddddddddddddd...........</h2>
-        {/* Add your page-specific content here */}
+
+      {/* Main content */}
+      <div style={{ flex: 1, padding: "20px" }}>
+        <h1>Welcome to User Home</h1>
+        <p>This is the main content area.</p>
       </div>
     </div>
   );

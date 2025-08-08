@@ -13,23 +13,18 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import UserLogin from './pages/Userlog';
 import Dashboard from './pages/Dashboard';
-
 import Navbar from './components/navbar';
 import Sidebar from './components/sidebar';
-
 import Userhome from './pages/UserHome';
-
 import BookList from './features/books/BookList';
 import AddBook from './features/books/AddBook';
-
 import StaffReg from './features/Member/StaffReg';
 import StudentRegistration from './features/Member/StudentReg';
 import MemberList from './features/Member/MemberList';
-
 import Home from './pages/Home';
 import Footer from './components/Footer';
 
-function AppContent() {
+function AppContent({ isSidebarOpen, toggleSidebar }) {
   const location = useLocation();
 
   const [books, setBooks] = useState([]);
@@ -37,11 +32,7 @@ function AppContent() {
   const [staffs, setStaffs] = useState([]);
 
   const addBook = (book) => {
-    const newBook = {
-      id: books.length + 1,
-      ...book,
-    };
-    setBooks([...books, newBook]);
+    setBooks([...books, { id: books.length + 1, ...book }]);
   };
 
   const handleStudentRegister = (studentData) => {
@@ -52,47 +43,72 @@ function AppContent() {
     setStaffs([...staffs, staffData]);
   };
 
-  // Navigation visibility controls
   const path = location.pathname;
-  const hideNavbar = ['/login', '/register', '/userReg', '/home', '/', '/userhome'].includes(path);
+
+  // Pages where we show the sidebar
+  const sidebarPages = [
+    '/userhome',
+    '/books',
+    '/members',
+    '/dashboard',
+    '/add-book',
+    '/staffreg',
+    '/studentreg',
+  ];
+
+  const showSidebar = sidebarPages.includes(path);
+
+  // Hide navbar for login/landing + all sidebar pages
+  const hideNavbar = [
+    '/login',
+    '/register',
+    '/userReg',
+    '/home',
+    '/',
+    ...sidebarPages
+  ].includes(path);
+
+  // Hide footer for login/landing
   const hideFooter = ['/login', '/register', '/userReg', '/home', '/'].includes(path);
-  const showSidebar = path === '/userhome'; // Show sidebar only on UserHome
 
   return (
-    <>
-      {!hideNavbar && <Navbar />}
-      {showSidebar && <Sidebar />}
+    <div className="d-flex flex-grow-1">
+      {showSidebar && <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />}
 
-      <Routes>
-        <Route
-          path="/dashboard"
-          element={<Dashboard books={books} students={students} staffs={staffs} />}
-        />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/Userlog" element={<UserLogin />} />
+      <div className="flex-grow-1">
+        {!hideNavbar && <Navbar />}
 
-        <Route path="/add-book" element={<AddBook addBook={addBook} />} />
-        <Route path="/books" element={<BookList books={books} />} />
+        <div className="p-3">
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard books={books} students={students} staffs={staffs} />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/Userlog" element={<UserLogin />} />
+            <Route path="/add-book" element={<AddBook addBook={addBook} />} />
+            <Route path="/books" element={<BookList books={books} />} />
+            <Route path="/staffreg" element={<StaffReg onRegister={handleStaffRegister} />} />
+            <Route path="/studentreg" element={<StudentRegistration onRegister={handleStudentRegister} />} />
+            <Route path="/members" element={<MemberList students={students} staffs={staffs} />} />
+            <Route path="/" element={<Home />} />
+            
+            <Route path="/userhome" element={<Userhome />} />
+          </Routes>
+        </div>
 
-        <Route path="/staffreg" element={<StaffReg onRegister={handleStaffRegister} />} />
-        <Route path="/studentreg" element={<StudentRegistration onRegister={handleStudentRegister} />} />
-
-        <Route path="/members" element={<MemberList students={students} staffs={staffs} />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/userhome" element={<Userhome />} />
-      </Routes>
-
-      {!hideFooter && <Footer />}
-    </>
+        {!hideFooter && <Footer />}
+      </div>
+    </div>
   );
 }
 
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
   return (
     <Router>
       <div className="d-flex flex-column min-vh-100">
-        <AppContent />
+        <AppContent isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       </div>
     </Router>
   );
