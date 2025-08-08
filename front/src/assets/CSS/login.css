@@ -1,0 +1,73 @@
+/* ===== Background Themes ===== */
+.login-page {
+  padding: 20px;
+}
+.login-page.purple-pink {
+  background: linear-gradient(135deg, #8e2de2, #ff6fd8);
+}
+.login-page.orange-red {
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+}
+.login-page.green-teal {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+}
+.login-page.blue-aqua {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+/* ===== Glass Effect Card ===== */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 18px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ===== Gradient Title ===== */
+.text-gradient {
+  background: linear-gradient(90deg, #ff6fd8, #3813c2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== Gradient Button ===== */
+.btn-gradient {
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  border: none;
+  transition: all 0.3s ease-in-out;
+  color: white;
+}
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+}
+
+/* ===== Input Focus Glow ===== */
+.form-control:focus {
+  border-color: #ff6fd8;
+  box-shadow: 0 0 8px rgba(255, 111, 216, 0.5);
+}
+
+/* ===== Animation ===== */
+@keyframes fade-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.8s ease-in-out;
+}
+
+/* Sidebar transition (if used in same project) */
+.sidebar {
+  transition: width 0.1s ease;
+  overflow: hidden;
+  height: 100vh;
+}
