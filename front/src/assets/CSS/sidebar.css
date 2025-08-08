@@ -1,25 +1,145 @@
+/* ===== Sidebar Container ===== */
 .sidebar {
-  transition: width 0.3s ease;
-  overflow: hidden;
   height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg, #0a0f24, #001e4d);
+  color: white;
+  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.4);
+  overflow-x: hidden;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* ===== Sidebar Open & Closed States ===== */
 .sidebar.open {
-  width: 250px;
+  width: 230px;
+  opacity: 1;
 }
 
 .sidebar.closed {
-  width: 60px;
+  width: 70px;
+  opacity: 0.95;
 }
 
-.sidebar.closed h4 {
-  display: none;
+/* ===== Toggle Button ===== */
+.sidebar button {
+  background: linear-gradient(90deg, #ddbe0d, #e94808); /* Dark red gradient */
+  border: none;
+  padding: 10px 0;
+  width: 90%;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease, box-shadow 0.25s ease;
+  margin-top: 15px;
+  user-select: none;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.8); /* subtle white glow */
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* shining text */
 }
 
-.sidebar.closed .nav-link {
+.sidebar button:hover,
+.sidebar button:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 6px 20px rgba(139, 0, 0, 0.9);
+  outline: none;
+  color: #fffdfa;
+}
+
+.sidebar button h4 {
+  color: white;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+  font-weight: 800;
+  margin: 0;
+  user-select: none;
+  transition: text-shadow 0.3s ease;
+}
+
+.sidebar button:hover h4 {
+  text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.7);
+}
+
+/* ===== Sidebar Header ===== */
+
+/* ===== Library Title ===== */
+.sidebar h4 {
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1.4rem;
+  animation: fadeIn 0.6s ease-in-out;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* ===== Navigation Links ===== */
+.sidebar .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  border-radius: 10px;
+  margin: 6px 0;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  user-select: none;
+}
+
+/* Active Link */
+.sidebar .nav-link.active {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: white !important;
+  box-shadow: 0 5px 15px rgba(0, 198, 255, 0.35);
+}
+
+/* Hover Glow */
+.sidebar .nav-link:hover,
+.sidebar .nav-link:focus {
+  background: rgba(0, 198, 255, 0.18);
+  color: white;
+  transform: translateX(6px);
+  text-decoration: none;
+  outline: none;
+}
+
+/* ===== Danger Links (Logout) ===== */
+.sidebar .nav-link.text-danger {
+  color: #ff4d4d !important;
+}
+
+.sidebar .nav-link.text-danger:hover,
+.sidebar .nav-link.text-danger:focus {
+  background: rgba(255, 77, 77, 0.2);
+  color: #ff1a1a !important;
+}
+
+/* ===== Icon Styling ===== */
+.sidebar .nav-link span {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  min-width: 24px;
 }
 
-.sidebar.closed .nav-link span {
-  margin-right: 0;
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

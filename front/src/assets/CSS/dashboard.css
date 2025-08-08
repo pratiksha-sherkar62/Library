@@ -1,7 +1,7 @@
 /* Navbar container - gradient & glass effect */
 .navbar {
   backdrop-filter: blur(12px);
-  background: linear-gradient(90deg, #6a11cb, #2575fc) !important;
+  /* background: linear-gradient(90deg, #6a11cb, #2575fc) !important; */background: linear-gradient(90deg, #134e4a, #4caf50) !important;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
 }
@@ -80,3 +80,38 @@
 .navbar img:hover {
   transform: rotate(-5deg) scale(1.05);
 }
+/* Shining/glow text effect */
+.shiny-text {
+  font-weight: 700;
+  text-shadow:
+    0 0 5px #5a9cff,
+    0 0 10px #5a9cff,
+    0 0 20px #3377ff,
+    0 0 30px #2a5cff,
+    0 0 40px #1e3dbf;
+  transition: text-shadow 0.3s ease-in-out;
+}
+
+.shiny-text:hover {
+  text-shadow:
+    0 0 10px #a1caff,
+    0 0 20px #6a9cff,
+    0 0 30px #4a6fff,
+    0 0 40px #3377ff,
+    0 0 50px #1e3dbf;
+}
+
+/* Glow effect for the icon */
+.shiny-icon {
+  filter: drop-shadow(0 0 5px #3b82f6);
+  transition: filter 0.3s ease-in-out;
+}
+
+.shiny-icon:hover {
+  filter:
+    drop-shadow(0 0 10px #60a5fa)
+    drop-shadow(0 0 20px #3b82f6)
+    drop-shadow(0 0 30px #2563eb);
+}
+
+

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { FaBars, FaTimes } from "react-icons/fa";
 import '../assets/CSS/sidebar.css';
 import {
   FaHome,
@@ -29,10 +30,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   return (
     <div className={`sidebar bg-light p-3 ${isOpen ? 'open' : 'closed'}`}>
       <button className="btn btn-primary mb-3 w-100" onClick={toggleSidebar}>
-        {isOpen ? 'Hide Sidebar' : 'Show Sidebar'}
+        {isOpen ? <h4 className="text-primary">📚 Library</h4> : <FaBars size={20} />}
       </button>
 
-      {isOpen && <h4 className="text-primary">📚 Library</h4>}
+      {/* {isOpen && <h4 className="text-primary">📚 Library</h4>} */}
 
       <ul className="nav nav-pills flex-column mb-auto mt-4">
         {menuItems.map((item, index) => (

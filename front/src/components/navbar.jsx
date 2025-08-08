@@ -1,6 +1,7 @@
 // src/components/Navbar.jsx
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaBookOpen } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../assets/CSS/dashboard.css';
@@ -17,20 +18,23 @@ const Navbar = () => {
 
             
             <li className="nav-item">
-            <Link className="nav-link text-white" to="/library"
+  <Link
+    className="nav-link text-white shiny-text d-flex align-items-center"
+    to="/library"
     style={{
       whiteSpace: 'nowrap',
       fontSize: '20px',
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '8px'
-    }}>
-    <img src="/book.png" alt="Book Logo" width="40" height="40" style={{ objectFit: 'contain' }}/>
-    My Library </Link>
+      gap: '10px',
+    }}
+  >
+    {/* Using React Icon for sharper look */}
+    <FaBookOpen size={38} className="shiny-icon" />
+    My Library
+  </Link>
 </li>
 
 
-            <li className="nav-item ms-5"> <Link className="nav-link" to="/Dashboard" style={{ whiteSpace: 'nowrap', fontSize: '18px' }}> DashBoard </Link></li>
+              <li className="nav-item ms-5"> <Link className="nav-link" to="/Dashboard" style={{ whiteSpace: 'nowrap', fontSize: '18px' }}> DashBoard </Link></li>
             <li className="nav-item ms-5"> <Link className="nav-link" to="/add-book" style={{ whiteSpace: 'nowrap', fontSize: '18px' }}> Add Book </Link></li>
 
             <li className="nav-item dropdown">
