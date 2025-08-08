@@ -3,7 +3,7 @@ import React from "react";
 
 const UserHome = () => {
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex" ,minHeight: "84vh" }}>
       {/* Sidebar only once */}
      
 

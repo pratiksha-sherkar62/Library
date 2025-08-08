@@ -1,9 +1,11 @@
+// src/App.js (or wherever your App component lives)
 import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
+  matchPath,
 } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -43,44 +45,57 @@ function AppContent({ isSidebarOpen, toggleSidebar }) {
     setStaffs([...staffs, staffData]);
   };
 
-  const path = location.pathname;
+  const path = location.pathname; // current path
 
-  // Pages where we show the sidebar
-  const sidebarPages = [
-    '/userhome',
-    '/books',
-    '/members',
-    '/dashboard',
+  // ------------ Debug (temporary) --------------
+  // Open browser console and check these values if navbar still doesn't show.
+  // Remove the console.log lines after you verify.
+  // eslint-disable-next-line no-console
+  console.log('Current pathname:', path);
+  // ---------------------------------------------
+
+  // pages where you want the navbar visible (supports nested routes)
+  const navbarPages = [
     '/add-book',
+    '/books',
     '/staffreg',
     '/studentreg',
+    '/members',
+    '/dashboard',
+    
   ];
 
-  const showSidebar = sidebarPages.includes(path);
+  // Using matchPath with end: false so '/dashboard' matches '/dashboard' and '/dashboard/123'
+  const showNavbar = navbarPages.some((p) =>
+    Boolean(matchPath({ path: p, end: false }, path))
+  );
 
-  // Hide navbar for login/landing + all sidebar pages
-  const hideNavbar = [
+  // Sidebar visible only on exact /userhome (change to matchPath if you want nested)
+  const showSidebar = Boolean(matchPath({ path: '/userhome', end: true }, path));
+
+  // Footer hidden for these routes (you can add '/userhome' here if you want)
+  const hideFooter = [
     '/login',
     '/register',
     '/userReg',
     '/home',
     '/',
-    ...sidebarPages
+    '/Userlog',
   ].includes(path);
-
-  // Hide footer for login/landing
-  const hideFooter = ['/login', '/register', '/userReg', '/home', '/'].includes(path);
 
   return (
     <div className="d-flex flex-grow-1">
       {showSidebar && <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />}
 
       <div className="flex-grow-1">
-        {!hideNavbar && <Navbar />}
+        {showNavbar && <Navbar />}
 
         <div className="p-3">
           <Routes>
-            <Route path="/dashboard" element={<Dashboard books={books} students={students} staffs={staffs} />} />
+            <Route
+              path="/dashboard"
+              element={<Dashboard books={books} students={students} staffs={staffs} />}
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/Userlog" element={<UserLogin />} />
@@ -90,7 +105,6 @@ function AppContent({ isSidebarOpen, toggleSidebar }) {
             <Route path="/studentreg" element={<StudentRegistration onRegister={handleStudentRegister} />} />
             <Route path="/members" element={<MemberList students={students} staffs={staffs} />} />
             <Route path="/" element={<Home />} />
-            
             <Route path="/userhome" element={<Userhome />} />
           </Routes>
         </div>
