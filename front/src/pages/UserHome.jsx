@@ -1,11 +1,11 @@
 import React from "react";
-import Sidebar from "../components/sidebar";
+
 
 const UserHome = () => {
   return (
     <div style={{ display: "flex" }}>
       {/* Sidebar only once */}
-      <Sidebar />
+     
 
       {/* Main content */}
       <div style={{ flex: 1, padding: "20px" }}>
