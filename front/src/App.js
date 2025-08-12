@@ -62,7 +62,7 @@ function AppContent({ isSidebarOpen, toggleSidebar }) {
     '/studentreg',
     '/members',
     '/dashboard',
-    
+
   ];
 
   // Using matchPath with end: false so '/dashboard' matches '/dashboard' and '/dashboard/123'
@@ -80,7 +80,7 @@ function AppContent({ isSidebarOpen, toggleSidebar }) {
     '/userReg',
     '/home',
     '/',
-    '/Userlog',
+    '/Userlog'
   ].includes(path);
 
   return (
