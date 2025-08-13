@@ -17,3 +17,13 @@ exports.createBook = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.getAllBooks = async (req, res) => {
+  try {
+    const books = await Book.getAllBooks();
+    res.json(books);
+  } catch (error) {
+    console.error('Error in getAllBooks:', error);
+    res.status(500).json({ message: error.message });
+  }
+};

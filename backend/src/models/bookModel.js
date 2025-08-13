@@ -9,3 +9,10 @@ exports.addBook = async (book) => {
   );
   return result;
 };
+
+exports.getAllBooks = async () => {
+  const db = getDB();
+  console.log("DB object:", db); // 👈 This will tell if DB is connected
+  const [rows] = await db.query('SELECT * FROM books ORDER BY id DESC');
+  return rows;
+};
