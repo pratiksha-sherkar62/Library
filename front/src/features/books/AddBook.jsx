@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../assets/CSS/FormStyles.css';
 
-function AddBook({ addBook }) {
+function AddBook() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -17,12 +17,39 @@ function AddBook({ addBook }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { title, author, year, quantity, status } = formData;
-    if (title && author && year && quantity && status) {
-      addBook({ ...formData, quantity: parseInt(quantity) });
+
+    if (!title || !author || !year || !quantity || !status) {
+      alert('All fields are required');
+      return;
+    }
+
+    try {
+      const res = await fetch('http://localhost:5000/api/books', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title,
+          author,
+          year,
+          quantity: parseInt(quantity),
+          status
+        })
+      });
+
+      const data = await res.json();
+      console.log('Server response:', data);
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to add book');
+      }
+
       navigate('/books');
+    } catch (err) {
+      console.error('Error adding book:', err);
+      alert(err.message);
     }
   };
 
