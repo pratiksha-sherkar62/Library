@@ -5,6 +5,7 @@ function BookList() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(""); // 🔹 state for search input
 
   useEffect(() => {
     fetch('http://localhost:5000/api/books')
@@ -16,8 +17,6 @@ function BookList() {
       })
       .then(data => {
         console.log("Books API response:", data);
-
-        // Ensure books is always an array
         if (Array.isArray(data)) {
           setBooks(data);
         } else if (data && Array.isArray(data.books)) {
@@ -34,6 +33,12 @@ function BookList() {
       .finally(() => setLoading(false));
   }, []);
 
+  // 🔹 Filter books based on search query
+  const filteredBooks = books.filter((book) =>
+    book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    book.author.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (loading) {
     return <p className="text-center mt-5">Loading books...</p>;
   }
@@ -48,8 +53,19 @@ function BookList() {
         <div className="card-body">
           <h1 className="card-title text-center mb-4">📚 Book List</h1>
 
-          {books.length === 0 ? (
-            <p className="text-muted text-center">No books available.</p>
+          {/* 🔹 Search Bar */}
+          <div className="mb-4">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="🔍 Search by title or author..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+
+          {filteredBooks.length === 0 ? (
+            <p className="text-muted text-center">No books found.</p>
           ) : (
             <div className="table-responsive">
               <table className="table table-striped table-bordered align-middle text-center">
@@ -64,7 +80,7 @@ function BookList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {books.map((book) => (
+                  {filteredBooks.map((book) => (
                     <tr key={book.id}>
                       <td>{book.id}</td>
                       <td>{book.title}</td>

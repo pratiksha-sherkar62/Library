@@ -20,6 +20,9 @@ app.use('/api/books', bookRoutes);
 const staffRoutes = require("./routes/staffRoutes");
 app.use("/api/staff", staffRoutes);
 
+const studentRoutes = require("./routes/studentRoutes");
+app.use("/api/student", studentRoutes);
+
 // Health check
 app.get('/', (req, res) => {
   res.send('Backend is running...');

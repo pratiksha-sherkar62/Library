@@ -1,31 +1,35 @@
-const { getDB } = require("../config/db");
+// src/controllers/staffController.js
+const db = require("../config/db");
 
-const registerStaff = async (req, res) => {
-  const { staffid, name, email, phonno, password, position } = req.body;
+// Register staff
+const registerStaff = (req, res) => {
+  const { name, email, phonno, password, position } = req.body;
 
-  if (!staffid || !name || !email || !phonno || !password || !position) {
+  if (!name || !email || !phonno || !password || !position) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  try {
-    const db = getDB();
+  const query =
+    "INSERT INTO staffregistration (name, email, phonno, password, position) VALUES (?, ?, ?, ?, ?)";
 
-    const sql =
-      "INSERT INTO staffregistration (staffid, name, email, phonno, password, position) VALUES (?, ?, ?, ?, ?, ?)";
-    await db.execute(sql, [staffid, name, email, phonno, password, position]);
-
-    res.status(201).json({ message: "Staff registered successfully!" });
-  } catch (err) {
-    console.error("❌ Error registering staff:", err);
-
-    if (err.code === "ER_DUP_ENTRY") {
-      return res
-        .status(400)
-        .json({ message: "Email, phone, or staff ID already exists" });
+  db.query(query, [name, email, phonno, password, position], (err, result) => {
+    if (err) {
+      console.error("Error inserting staff:", err);
+      return res.status(500).json({ message: "Error registering staff" });
     }
-
-    res.status(500).json({ message: "Internal Server Error" });
-  }
+    res.status(201).json({ message: "Staff registered successfully" });
+  });
 };
 
-module.exports = { registerStaff };
+// Get all staff
+const getStaff = (req, res) => {
+  db.query("SELECT * FROM staffregistration", (err, results) => {
+    if (err) {
+      console.error("Error fetching staff:", err);
+      return res.status(500).json({ message: "Error fetching staff" });
+    }
+    res.json(results);
+  });
+};
+
+module.exports = { registerStaff, getStaff };
