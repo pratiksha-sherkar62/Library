@@ -1,13 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-require('dotenv').config();
 
 const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow requests from React frontend
+  origin: 'http://localhost:3000', // Allow frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
@@ -18,7 +17,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const bookRoutes = require('./routes/bookRoutes');
 app.use('/api/books', bookRoutes);
 
-// Health check route (optional, for testing)
+const staffRoutes = require("./routes/staffRoutes");
+app.use("/api/staff", staffRoutes);
+
+// Health check
 app.get('/', (req, res) => {
   res.send('Backend is running...');
 });

@@ -25,6 +25,7 @@ import StudentRegistration from './features/Member/StudentReg';
 import MemberList from './features/Member/MemberList';
 import Home from './pages/Home';
 import Footer from './components/Footer';
+import axios from "axios";
 
 function AppContent({ isSidebarOpen, toggleSidebar }) {
   const location = useLocation();
