@@ -1,10 +1,89 @@
-.bg-image {
-  background-image: url('https://th.bing.com/th/id/OIP.oQQCn3L6oubZK7jq5XWxngHaCH?w=323&h=100&c=7&r=0&o=5&dpr=1.3&pid=1.7');
+
+/* Background image for top section */
+
+/* Hero section */
+.hero-section {
+  min-height: 80vh; /* fill most of the screen */
+  background-color: #fff;
+  padding: 0px;
   
-    background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  image-rendering: auto;
-  height: 100%;
+}
+
+/* Title responsive */
+.hero-title {
+  font-size: clamp(28px, 5vw, 48px); /* auto scale */
+  font-weight: bold;
+  color: #000;
+}
+
+.hero-subtitle {
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: #444;
+  margin-top: 10px;
+}
+
+/* Custom buttons */
+.btn-custom {
+  width: 130px;
+  height: 40px;
+  background-color: #1f2a3a;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-custom:hover {
+  background-color: white;
+  color: #1f2a3a;
+}
+
+.btn-link {
+  text-decoration: none;
+  color: inherit;
   width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Blue Get Started button */
+.btn-get-started {
+  background-color: #007bff;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-get-started:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+/* ✅ Responsive navbar */
+@media (max-width: 768px) {
+  .home-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .btn-custom {
+    width: 100px;
+    height: 35px;
+    font-size: 13px;
+  }
+
+  .bg-image {
+    height: 180px;
+  }
 }
