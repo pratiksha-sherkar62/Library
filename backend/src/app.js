@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
-const bookRoutes = require('./routes/bookRoutes');
+const bookRoutes = require("./routes/bookRoutes");
 app.use('/api/books', bookRoutes);
 
 const staffRoutes = require("./routes/staffRoutes");
