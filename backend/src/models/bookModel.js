@@ -16,3 +16,17 @@ exports.getAllBooks = async () => {
   const [rows] = await db.query('SELECT * FROM books ORDER BY id ASC');
   return rows;
 };
+
+exports.deleteBook = async (id) => {
+  const db = getDB();
+  await db.query('DELETE FROM books WHERE id = ?', [id]);
+};
+
+exports.updateBook = async (id, book) => {
+  const db = getDB();
+  const { title, author, year, quantity, status } = book;
+  await db.query(
+    'UPDATE books SET title = ?, author = ?, year = ?, quantity = ?, status = ? WHERE id = ?',
+    [title, author, year, quantity, status, id]
+  );
+};
