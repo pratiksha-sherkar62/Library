@@ -10,7 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark" style={{ height: '100px', backgroundColor: '#005ef5ff',padding: '20px' }}>
+    <nav className="navbar navbar-expand-lg navbar-dark" style={{ height: '100px', backgroundColor: '#2e405bff',padding: '20px' }}>
       
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{ fontSize: '18px',alignItems: 'center'}}>
@@ -27,9 +27,19 @@ const Navbar = () => {
       gap: '10px',
     }}
   >
-    {/* Using React Icon for sharper look */}
-    <FaBookOpen size={38} className="shiny-icon" />
-    My Library
+    <div className="d-flex align-items-center">
+    <img
+      src="/rocket-book.png"
+      alt="Book Logo"
+      width="40"
+      height="40"
+      style={{ objectFit: "contain", marginRight: "10px" }}
+    />
+    <h3 style={{ color: "white", fontWeight: "bold", margin: 0 ,font:"arial"}}>
+     TechyLab
+    </h3>
+  </div>
+
   </Link>
 </li>
 

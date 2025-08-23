@@ -1,28 +1,8 @@
 /* ===== Glowing Footer ===== */
 .footer-glow {
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  background: linear-gradient(90deg, #092b35, #1c3657);
   background-size: 300% 300%;
   animation: footerGradientMove 6s ease infinite, footerShine 3s ease-in-out infinite;
-  box-shadow: 0 0 15px rgba(0, 198, 255, 0.4);
+  box-shadow: 0 0 15px rgba(28, 58, 67, 0.4);
 }
 
-/* ===== Gradient Movement Animation ===== */
-@keyframes footerGradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* ===== Shine Pulse Animation ===== */
-@keyframes footerShine {
-  0% { box-shadow: 0 0 15px rgba(0, 198, 255, 0.4); }
-  50% { box-shadow: 0 0 25px rgba(0, 198, 255, 0.8); }
-  100% { box-shadow: 0 0 15px rgba(0, 198, 255, 0.4); }
-}
-
-/* ===== Text Styling ===== */
-.footer-glow p {
-  margin: 0;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}

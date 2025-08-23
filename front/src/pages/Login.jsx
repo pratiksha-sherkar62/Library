@@ -27,15 +27,8 @@ function Login() {
   };
 
   return (
-    <div className="login-page purple-pink d-flex justify-content-center align-items-center vh-100">
-      {/* Helicopter Animation */}
-      <div className={helicopterClass}>
-        <div className="body"></div>
-        <div className="tail"></div>
-        <div className="rotor"></div>
-        <div className="shadow"></div>
-      </div>
-
+    <div className="login-page  d-flex justify-content-center align-items-center vh-100">
+     
       <div className="login-card shadow-lg animate-fade-up p-4">
         <h2 className="text-center mb-4 text-gradient fw-bold">Admin Login</h2>
         <form onSubmit={handleLogin}>
@@ -64,12 +57,12 @@ function Login() {
           </div>
           <div className="d-grid">
             <button type="submit" className="btn btn-gradient btn-lg shadow-sm">
-              🚁 Login
+               Login
             </button>
           </div>
         </form>
         <p className="text-center mt-4 text-light small opacity-75">
-          Default: <strong>admin / admin</strong>
+         
         </p>
       </div>
     </div>

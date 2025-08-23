@@ -1,102 +1,13 @@
-/* ===== Background Themes ===== */
-.login-page {
+
+.login-page
+{
+  background-image: url("../images/home.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
-}
-.login-page.purple-pink {
-  background: linear-gradient(135deg, #8e2de2, #ff6fd8);
-}
-.login-page.orange-red {
-  background: linear-gradient(135deg, #ff512f, #dd2476);
-}
-.login-page.green-teal {
-  background: linear-gradient(135deg, #11998e, #38ef7d);
-}
-.login-page.blue-aqua {
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-}
-
-/* ===== Glass Effect Card ===== */
-.login-card {
-  width: 100%;
-  max-width: 420px;
-  border-radius: 18px;
-  backdrop-filter: blur(15px);
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-/* ===== Gradient Title ===== */
-.text-gradient {
-  background: linear-gradient(90deg, #ff6fd8, #3813c2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ===== Gradient Button ===== */
-.btn-gradient {
-  background: linear-gradient(90deg, #4facfe, #00f2fe);
-  border: none;
-  transition: all 0.3s ease-in-out;
-  color: white;
-}
-.btn-gradient:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
-}
-
-/* ===== Input Focus Glow ===== */
-.form-control:focus {
-  border-color: #ff6fd8;
-  box-shadow: 0 0 8px rgba(255, 111, 216, 0.5);
-}
-
-/* ===== Animation ===== */
-@keyframes fade-up {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-.animate-fade-up {
-  animation: fade-up 0.8s ease-in-out;
-}
-
-/* Sidebar transition (if used in same project) */
-.sidebar {
-  transition: width 0.1s ease;
-  overflow: hidden;
-  height: 100vh;
-}
-
-/* Helicopter fly circle animation */
-.fly-circle {
-  animation: flyCircle 12s linear infinite;
-}
-
-/* Helicopter fly-away animation */
-.fly-away {
-  animation: flyAway 2s forwards;
-}
-
-/* Fly-away keyframes remain same */
-@keyframes flyAway {
-  0% { transform: translate3d(0, 0, 0) rotateY(0deg); opacity: 1; }
-  50% { transform: translate3d(50vw, -50vh, 100px) rotateY(180deg) rotateZ(360deg); opacity: 0.8; }
-  100% { transform: translate3d(100vw, -100vh, 200px) rotateY(360deg) rotateZ(720deg); opacity: 0; }
-}
-
-/* Shake for invalid login */
-.shake {
-  animation: shakeAnim 0.5s;
-}
-@keyframes shakeAnim {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  50% { transform: translateX(10px); }
-  75% { transform: translateX(-10px); }
-  100% { transform: translateX(0); }
 }

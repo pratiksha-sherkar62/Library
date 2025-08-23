@@ -1,6 +1,7 @@
+// src/components/Footer.jsx
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'components/HomeFooter.jsx';
+
 const HomeFooter = () => {
   return (
     <footer className="bg-dark text-white mt-auto py-4">
