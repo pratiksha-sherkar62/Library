@@ -13,7 +13,7 @@ function UserLogin() {
     e.preventDefault();
 
     try{
-      const Stud = await axios.post("http://localhost:5000/api/student", {
+      const Stud = await axios.post("http://localhost:5000/api/student/login", {
         email : username,
         password : password
       });
