@@ -1,5 +1,3 @@
-
-
 const express = require("express");
 const { registerStudent, getStudents } = require("../controllers/studentController");
 

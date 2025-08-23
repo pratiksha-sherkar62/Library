@@ -99,7 +99,7 @@ function StaffReg() {
               required
             />
           </div>
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <input
               name="staffid"
               className="form-control"
@@ -107,7 +107,7 @@ function StaffReg() {
               onChange={handleChange}
               required
             />
-          </div>
+          </div> */}
           <div className="mb-3">
             <input
               name="position"

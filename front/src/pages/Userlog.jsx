@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/CSS/userlogin.css';
+import axios from 'axios';
 
 function UserLogin() {
   const navigate = useNavigate();
@@ -8,19 +9,43 @@ function UserLogin() {
   const [password, setPassword] = useState('');
   const [isFlying, setIsFlying] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async(e) => {
     e.preventDefault();
 
-    if (username === 'user' && password === 'password') {
-      setIsFlying(true); // Trigger rocket animation
+    try{
+      const Stud = await axios.post("http://localhost:5000/api/student", {
+        email : username,
+        password : password
+      });
 
-      // Wait for animation before navigating
-      setTimeout(() => {
-        navigate('/userhome');
-      }, 1000); // match with animation time in CSS
-    } else {
-      alert('❌ Invalid credentials. Try user/password');
+
+      if(Stud.data.student){
+        setIsFlying(true);
+        setTimeout(() => {
+          navigate('/userhome');
+        }, 1000);
+        return
+      }
+    } catch (error) {
+      try {
+        const staff = await axios.post("http://localhost:5000/api/staff/login", {
+          email : username,
+          password : password
+        });
+
+      if (staff.data.success) {
+        setIsFlying(true);
+        setTimeout(() => {
+          navigate('/userhome');
+        }, 1000);
+      } else {
+        alert('❌ Invalid credentials. Try user/password');
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert('❌ An error occurred. Please try again later.');
     }
+  }
   };
 
   return (
