@@ -1,5 +1,5 @@
 import React from "react";
-import sidebar from "../components/sidebar";
+import Sidebar from "../components/Sidebar";
 
 const UserHome = () => {
   const [isOpen, setIsOpen] = React.useState(true);
@@ -12,7 +12,7 @@ const UserHome = () => {
     <div style={{ display: "flex" ,minHeight: "84vh" }}>
       {/* Sidebar only once */}
       <div style={{ width: isOpen ? "15%" : "0", transition: "width 0.3s" }}>
-        <sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
+        <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
       </div>
 
       {/* Main content */}
