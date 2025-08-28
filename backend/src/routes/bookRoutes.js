@@ -1,29 +1,37 @@
-/* const express = require('express');
+const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
+
+const verifyToken = require('../middlewares/authMiddleware');
 const bookController = require('../controllers/bookController');
 
-router.get('/', bookController.getAllBooks);
-router.post('/', bookController.createBook);
-router.delete('/:id', bookController.deleteBook);
-router.put('/:id', bookController.updateBook);
-
-module.exports = router;
- */
-const express = require("express");
-const router = express.Router();
-const verifyToken = require("../middlewares/authMiddleware");
-
-router.get("/all-books", verifyToken, (req, res) => {
-  // Now you can use req.user
-  res.json({ message: `Welcome ${req.user.role}, here are the books.` });
+// Multer setup
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const dir = './uploads';
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+    cb(null, dir);
+  },
+  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
 });
+const upload = multer({ storage });
 
-// Example: only admin can add books
-router.post("/add-book", verifyToken, (req, res) => {
-  if (req.user.role !== "admin") {
-    return res.status(403).json({ message: "Access denied. Admins only." });
+// Admin-only add book
+router.post('/add-book', verifyToken, upload.single('image'), async (req, res) => {
+  try {
+    if (req.user.role !== 'admin')
+      return res.status(403).json({ message: 'Access denied. Admins only.' });
+
+    await bookController.createBook(req, res);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
-  res.json({ message: "Book added successfully!" });
 });
 
+// Get all books (any logged-in user)
+router.get('/all-books', verifyToken, bookController.getAllBooks);
+
 module.exports = router;
+// Delete book (admin only)

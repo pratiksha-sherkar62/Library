@@ -2,10 +2,10 @@ const { getDB } = require('../config/db');
 
 exports.addBook = async (book) => {
   const db = getDB();
-  const { title, author, year, quantity, status } = book;
+  const { title, author, year, quantity, status, image } = book;
   const [result] = await db.query(
-    'INSERT INTO books (title, author, year, quantity, status) VALUES (?, ?, ?, ?, ?)',
-    [title, author, year, quantity, status]
+    'INSERT INTO books (title, author, year, quantity, status, image) VALUES (?, ?, ?, ?, ?, ?)',
+    [title, author, year, quantity, status, image]
   );
   return result;
 };

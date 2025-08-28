@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { initDB } = require('./src/config/db');
 const app = require('./src/app');
 

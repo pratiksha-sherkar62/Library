@@ -1,22 +1,41 @@
+// const Book = require('../models/bookModel');
+
 const Book = require('../models/bookModel');
+const path = require('path');
+const fs = require('fs');
+
+// Multer setup (backend server file: routes/bookRoutes.js मध्ये import करावा)
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const dir = './uploads';
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir); // uploads folder create
+    cb(null, dir);
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // unique file name
+  },
+});
+const upload = multer({ storage });
 
 exports.createBook = async (req, res) => {
-  console.log('Incoming request body:', req.body);
   try {
     const { title, author, year, quantity, status } = req.body;
+    const image = req.file ? req.file.filename : null;
 
     if (!title || !author || !year || !quantity || !status) {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
-    await Book.addBook({ title, author, year, quantity, status });
+    await Book.addBook({ title, author, year, quantity, status, image });
     res.status(201).json({ message: 'Book added successfully' });
-
   } catch (error) {
     console.error('Error in createBook:', error);
     res.status(500).json({ message: error.message });
   }
 };
+
+
 
 exports.getAllBooks = async (req, res) => {
   try {
