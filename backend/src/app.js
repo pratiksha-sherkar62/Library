@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve uploaded images
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('./uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 const bookRoutes = require('./routes/bookRoutes');

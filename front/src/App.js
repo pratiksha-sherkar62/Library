@@ -27,6 +27,7 @@
   import Footer from './components/Footer';
   import UserProfile from './features/users/UserProfile'; 
   import axios from "axios";
+  import SearchBook from './features/users/searchBook'
 
   function AppContent({ isSidebarOpen, toggleSidebar }) {
     const location = useLocation();
@@ -82,7 +83,8 @@
       '/userReg',
       '/home',
       '/',
-      '/Userlog'
+      '/Userlog',
+      '/search'
     ].includes(path);
 
     return (
@@ -109,6 +111,7 @@
               <Route path="/" element={<Home />} />
               <Route path="/userhome" element={<Userhome />} />
               <Route path="/Profile" element={<UserProfile />} />
+              <Route path="/search" element={<SearchBook />} />
             </Routes>
           </div>
 

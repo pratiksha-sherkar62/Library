@@ -19,7 +19,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const menuItems = [
     { path: '/userhome', label: 'Home', icon: <FaHome /> },
     { path: '/Profile', label: 'My Profile', icon: <FaUser /> },
-    { path: '/search-books', label: 'Search Books', icon: <FaSearch /> },
+    { path: '/search', label: 'Search Books', icon: <FaSearch /> },
     { path: '/favorites', label: 'Favorites', icon: <FaHeart /> },
     { path: '/book-issue', label: 'Book Issue', icon: <FaBook /> },
     { path: '/book-return', label: 'Book Return', icon: <FaUndo /> },

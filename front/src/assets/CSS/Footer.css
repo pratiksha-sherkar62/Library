@@ -1,8 +1,12 @@
-/* ===== Glowing Footer ===== */
 .footer-glow {
   background: linear-gradient(90deg, #092b35, #1c3657);
   background-size: 300% 300%;
   animation: footerGradientMove 6s ease infinite, footerShine 3s ease-in-out infinite;
   box-shadow: 0 0 15px rgba(28, 58, 67, 0.4);
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
+/* Optional: ensure text is always visible */
+.footer-glow p {
+  margin: 0;
+}

@@ -6,9 +6,6 @@ const { getDB } = require("../config/db");
 
 exports.addBook = async (req, res) => {
   try {
-    console.log("req.body:", req.body);
-    console.log("req.file:", req.file);
-
     const { title, author } = req.body;
     const image = req.file ? req.file.filename : null;
 
@@ -20,12 +17,18 @@ exports.addBook = async (req, res) => {
     const query = "INSERT INTO books (title, author, image) VALUES (?, ?, ?)";
     const [result] = await db.execute(query, [title, author, image]);
 
-    res.status(201).json({ message: "Book added successfully", bookId: result.insertId });
+    const newBook = { id: result.insertId, title, author, image };
+
+    // Emit the new book to all connected clients
+    req.io.emit("newBook", newBook);
+
+    res.status(201).json({ message: "Book added successfully", book: newBook });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
 
 exports.getBooks = async (req, res) => {
   try {

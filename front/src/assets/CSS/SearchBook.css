@@ -1,0 +1,72 @@
+/* Layout */
+.searchbook-page {
+  min-height: 100vh;
+}
+
+.sidebar-container {
+  width: 15%;
+  transition: width 0.3s;
+}
+
+.sidebar-container.closed {
+  width: 0;
+}
+
+/* Main content */
+.searchbook-content {
+  transition: all 0.3s;
+}
+
+/* Search input */
+.search-input {
+  max-width: 400px;
+  border-radius: 50px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Book grid */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+/* Book card */
+.book-card {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Book image */
+.book-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+/* Book info */
+.book-info {
+  padding: 10px 15px;
+}
+
+.book-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #092b35;
+}
+
+.book-author {
+  font-size: 0.9rem;
+  color: #555;
+}
