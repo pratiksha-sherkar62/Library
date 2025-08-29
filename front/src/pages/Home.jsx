@@ -17,14 +17,26 @@ const Home = () => {
     <img
       src="/rocket-book.png"
       alt="Book Logo"
-      width="40"
-      height="40"
+      width="42"
+      height="42"
       style={{ objectFit: "contain", marginRight: "10px" }}
     />
-    <h3 style={{ color: "#06306bff", fontWeight: "bold", margin: 0 ,font:"arial"}}>
+    <h3 style={{ color: "#06306bff", fontWeight: "bold", margin: 0 ,font:"arial",display:"flex",flexDirection:"column"}}>
      TechyLab
+     <p style={{ margin: 0, fontStyle: "italic", fontSize: "14px" }}>
+        Where Books Meet Technology.
+      </p>
     </h3>
+     
   </div>
+
+<div className="nav-links d-flex gap-4">
+  <a href="/" className="nav-item">Home</a>
+  <a href="#services" className="nav-item">Services</a>
+  <a href="#about" className="nav-item">About Us</a>
+  <a href="#contact" className="nav-item">Contact Us</a>
+</div>
+
 
   {/* Buttons */}
   <div>
@@ -38,8 +50,9 @@ const Home = () => {
 </nav>
 
       {/* Hero Section */}
-      <div className="container my-5" style={{backgroundColor:'#eaeefef2', padding:'30px'}}>
-        <div className="row align-items-center">
+      <div className="container-fluid my-2" 
+     style={{height:"350px", width:"100%", backgroundColor:'#eaeefef2', padding:'20px',paddingLeft:"60px"}}>
+         <div className="row align-items-center">
           {/* Left Text */}
           <div className="col-md-6 text-start">
             <h1>Welcome to <span style={{ color: "#0056d2" }}>TechyLab</span></h1>
@@ -62,7 +75,7 @@ const Home = () => {
       </div>
 
      <div class="container my-5">
- <h2 class="text-center mb-4 fw-bold services-heading">
+ <h2 class="text-center mb-4 fw-bold services-heading" id="services">
   Services
 </h2>
   <div class="row g-4">
@@ -128,7 +141,7 @@ const Home = () => {
 </div>
 
 {/* About Us Section */}
-<div className="container my-5" style={{backgroundColor:'rgba(255, 255, 255, 0.98)', padding:'30px'}}>
+<div className="container my-5" id="about" style={{backgroundColor:'rgba(255, 255, 255, 0.98)', padding:'30px'}}>
   <h2 className="text-center mb-4 fw-bold" style={{ color: "#0056d2" }}>
     About Us
   </h2>
@@ -167,49 +180,77 @@ const Home = () => {
 
       
       {/* Footer */}
-      <footer className="text-white py-4" style={{ backgroundColor: "#0d1b2a",height:"auto" }}>
-        <div className="container d-flex flex-column flex-md-row justify-content-between align-items-start">
+      {/* Footer */}
+<footer className="text-white py-4" style={{ backgroundColor: "#0d1b2a", height: "auto" }}>
+  <div className="container d-flex flex-column flex-md-row justify-content-between align-items-start">
 
+    {/* Logo + Tagline */}
+    <div className="mb-3">
+      <div className="d-flex align-items-center mb-2">
+        <img
+          src="/rocket-book.png"
+          alt="TechyLab Logo"
+          width="40"
+          height="40"
+          style={{ marginRight: "8px", objectFit: "contain" }}
+        />
+        <h5 style={{ margin: 0 ,display:"flex",flexDirection:"column",lineHeight:1.5}}>TechyLab
+          <p style={{ margin: 0, fontStyle: "italic", fontSize: "14px" }}>
+        Where Books Meet Technology
+      </p>
+        </h5>
+      </div>
+      
+    </div>
 
-<div className="mb-3">
-  <div className="d-flex align-items-center mb-2">
-    <img 
-      src="/rocket-book.png"
-      alt="TechyLab Logo" 
-      width="30" 
-      height="30" 
-      style={{ marginRight: "8px", objectFit: "contain" }}
-    />
-    <h5 style={{ margin: 0 }}>TechyLab</h5>
+    {/* Quick Links */}
+    <div className="mb-3">
+      <h6>Quick Links</h6>
+      <ul className="list-unstyled"  style={{ gap:"3px",lineHeight:"2"}}>
+        <li>
+          <i className="fa-solid fa-link" style={{ color: "rgba(248, 249, 250, 1)" }}></i>
+          <Link to="/Userlog" className="footer-link ms-2">Student Login</Link>
+        </li>
+        <li>
+          <i className="fa-solid fa-link" style={{ color: "rgba(255, 255, 255, 1)" }}></i>
+          <Link to="/login" className="footer-link ms-2">Admin Login</Link>
+        </li>
+      </ul>
+    </div>
+
+     {/* Google Map Embed */}
+      <div className="mt-3">
+       <iframe
+  title="TechyLab Location"
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3780.4887428124275!2d73.78934807422367!3d18.642051665454126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b98f47c4bb49%3A0x51bc386898923174!2sGiri&#39;s%20TECH%20HUB%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1756450709576!5m2!1sen!2sin" 
+  width="100%"
+  height="200"
+  style={{ border: "0", borderRadius: "10px" }}  // ✅ fixed
+  allowFullScreen
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+/>
+      </div>
+
+    <div id="contact">
+      <h6>Get In Touch</h6>
+      <p><i className="fa-solid fa-envelope"></i> Email: support@TechyLab.com</p>
+      <p><i className="fa-solid fa-phone"></i> Phone: +91 8530653832</p>
+      <p><i className="fa-solid fa-map-marker-alt"></i> Address: TechyLab<br />
+        Block C, Shivneri College <br />
+        Old Mumbai-Pune Highway, <br />
+        Chinchwad, Pune, Maharashtra 411019.
+      </p>
+
+     
+    </div>
   </div>
-  <p style={{ margin: 0, fontStyle: "italic", fontSize: "14px" }}>
-    Where Books Meet Technology
-  </p>
-</div>
 
+  <div className="text-center mt-3">
+    <small>© 2025 TechyLab. All rights reserved.</small>
+  </div>
+</footer>
 
-
-          {/* Quick Links */}
-          <div className="mb-3">
-            <h6>Quick Links</h6>
-            <ul className="list-unstyled">
-              {/* <li><Link to="/" className="footer-link">Home</Link></li> */}
-              <li><Link to="/Userlog" className="footer-link">Student Login</Link></li>
-              <li><Link to="/login" className="footer-link">Admin Login</Link></li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h6>Contact Us</h6>
-            <i className="fa-solid fa-envelope"></i>Email: support@TechyLab.com<br></br>
-            <i className="fa-solid fa-phone"></i>Phone: +91 8530653832
-          </div>
-        </div>
-        <div className="text-center mt-3">
-          <small>© 2025 TechyLab. All rights reserved.</small>
-        </div>
-      </footer>
     </div>
   );
 };
