@@ -33,6 +33,9 @@ app.use('/api/student', studentRoutes);
 const userRoutes = require('./routes/userRoutes');
 app.use('/api/user', userRoutes);
 
+const adminRoutes = require("./routes/adminRoutes");
+app.use("/api/admin", adminRoutes);
+
 // Health check
 app.get('/', (req, res) => res.send('Backend running!'));
 

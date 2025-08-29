@@ -1,34 +1,53 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../assets/CSS/login.css';
 
 function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [helicopterClass, setHelicopterClass] = useState('helicopter fly-circle');
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    if (username === 'admin' && password === 'admin') {
-      // Replace fly-circle with fly-away
-      setHelicopterClass('helicopter fly-away');
+    try {
+      // Call backend login API
+      const res = await axios.post("http://localhost:5000/api/admin/login", {
+        username,
+        password,
+      });
 
-      // Navigate after animation finishes
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 2000); // match animation duration
-    } else {
-      const card = document.querySelector('.login-card');
-      card.classList.add('shake');
-      setTimeout(() => card.classList.remove('shake'), 500);
+      if (res.data && res.data.token) {
+        // Save token in localStorage
+        localStorage.setItem("token", res.data.token);
+
+        // Redirect to dashboard
+        navigate("/dashboard");
+      } else {
+        throw new Error("Invalid login response");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+
+      // Shake animation for error
+      const card = document.querySelector(".login-card");
+      if (card) {
+        card.classList.add("shake");
+        setTimeout(() => card.classList.remove("shake"), 500);
+      }
+
+      alert(err.response?.data?.message || "Invalid credentials. Try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="login-page  d-flex justify-content-center align-items-center vh-100">
-     
+    <div className="login-page d-flex justify-content-center align-items-center vh-100">
       <div className="login-card shadow-lg animate-fade-up p-4">
         <h2 className="text-center mb-4 text-gradient fw-bold">Admin Login</h2>
         <form onSubmit={handleLogin}>
@@ -56,14 +75,15 @@ function Login() {
             />
           </div>
           <div className="d-grid">
-            <button type="submit" className="btn btn-gradient btn-lg shadow-sm">
-               Login
+            <button 
+              type="submit" 
+              className="btn btn-gradient btn-lg shadow-sm"
+              disabled={loading}
+            >
+              {loading ? "Logging in..." : "Login"}
             </button>
           </div>
         </form>
-        <p className="text-center mt-4 text-light small opacity-75">
-         
-        </p>
       </div>
     </div>
   );

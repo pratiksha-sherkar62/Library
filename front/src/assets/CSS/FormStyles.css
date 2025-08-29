@@ -69,3 +69,32 @@
     box-shadow: 0 0 15px rgba(0, 198, 255, 0.4);
   }
 }
+
+
+/* Make book images responsive */
+.book-image {
+  max-width: 100px;
+  max-height: 150px;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Responsive table on small screens */
+@media (max-width: 576px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .book-image {
+    max-width: 80px;
+    max-height: 120px;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+  }
+}

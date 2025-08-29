@@ -1,72 +1,41 @@
-// const Book = require('../models/bookModel');
 
-const Book = require('../models/bookModel');
-const path = require('path');
-const fs = require('fs');
 
-// Multer setup (backend server file: routes/bookRoutes.js मध्ये import करावा)
-const multer = require('multer');
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const dir = './uploads';
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir); // uploads folder create
-    cb(null, dir);
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // unique file name
-  },
-});
-const upload = multer({ storage });
+// bookController : 
+const e = require("express");
+const { getDB } = require("../config/db");
 
-exports.createBook = async (req, res) => {
+exports.addBook = async (req, res) => {
   try {
-    const { title, author, year, quantity, status } = req.body;
+    console.log("req.body:", req.body);
+    console.log("req.file:", req.file);
+
+    const { title, author } = req.body;
     const image = req.file ? req.file.filename : null;
 
-    if (!title || !author || !year || !quantity || !status) {
-      return res.status(400).json({ message: 'All fields are required' });
+    if (!title || !author) {
+      return res.status(400).json({ message: "Title and Author required" });
     }
 
-    await Book.addBook({ title, author, year, quantity, status, image });
-    res.status(201).json({ message: 'Book added successfully' });
-  } catch (error) {
-    console.error('Error in createBook:', error);
-    res.status(500).json({ message: error.message });
+    const db = getDB();
+    const query = "INSERT INTO books (title, author, image) VALUES (?, ?, ?)";
+    const [result] = await db.execute(query, [title, author, image]);
+
+    res.status(201).json({ message: "Book added successfully", bookId: result.insertId });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };
 
-
-
-exports.getAllBooks = async (req, res) => {
+exports.getBooks = async (req, res) => {
   try {
-    const books = await Book.getAllBooks();
-    res.json(books);
-  } catch (error) {
-    console.error('Error in getAllBooks:', error);
-    res.status(500).json({ message: error.message });
-  }
-};
+    const db = getDB();
+    const query = "SELECT * FROM books";
+    const [books] = await db.execute(query);
 
-exports.deleteBook = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    await Book.deleteBook(id);
-    res.status(204).send();
-  } catch (error) {
-    console.error('Error in deleteBook:', error);
-    res.status(500).json({ message: error.message });
-  }
-};
-exports.updateBook = async (req, res) => {
-  const { id } = req.params;
-  const { title, author, year, quantity, status } = req.body;
-
-  try {
-    await Book.updateBook(id, { title, author, year, quantity, status });
-    res.status(200).json({ message: 'Book updated successfully' });
-  } catch (error) {
-    console.error('Error in updateBook:', error);
-    res.status(500).json({ message: error.message });
+    res.status(200).json({ books });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };

@@ -1,37 +1,37 @@
-const express = require('express');
+
+// bookRoute : 
+const express = require("express");
+const multer = require("multer");
+const fs = require("fs");
+const { addBook } = require("../controllers/bookController");
+const { getDB } = require("../config/db");
+
 const router = express.Router();
-const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
 
-const verifyToken = require('../middlewares/authMiddleware');
-const bookController = require('../controllers/bookController');
-
-// Multer setup
+// multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = './uploads';
+    const dir = "./uploads";
     if (!fs.existsSync(dir)) fs.mkdirSync(dir);
     cb(null, dir);
   },
-  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
+  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
 });
+
 const upload = multer({ storage });
 
-// Admin-only add book
-router.post('/add-book', verifyToken, upload.single('image'), async (req, res) => {
-  try {
-    if (req.user.role !== 'admin')
-      return res.status(403).json({ message: 'Access denied. Admins only.' });
+// POST /api/books/add
+router.post("/add", upload.single("image"), addBook);
 
-    await bookController.createBook(req, res);
+router.get("/", async (req, res) => {
+  try {
+    const db = getDB();
+    const [rows] = await db.execute("SELECT * FROM books");
+    res.json({ books: rows });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error("Error fetching books:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 });
 
-// Get all books (any logged-in user)
-router.get('/all-books', verifyToken, bookController.getAllBooks);
-
 module.exports = router;
-// Delete book (admin only)
