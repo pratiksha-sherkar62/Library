@@ -1,14 +1,14 @@
-const express = require("express");
-const { registerStudent, getStudents,StudLog } = require("../controllers/studentController");
+// const express = require("express");
+// const { registerStudent, getStudents,StudLog } = require("../controllers/studentController");
 
-const router = express.Router();
+// const router = express.Router();
 
-// Register student
-router.post("/register", registerStudent);
+// // Register student
+// router.post("/register", registerStudent);
 
-router.post("/login", StudLog);
+// router.post("/login", StudLog);
 
-// Get all students
-router.get("/", getStudents);
+// // Get all students
+// router.get("/", getStudents);
 
-module.exports = router;
+// module.exports = router;

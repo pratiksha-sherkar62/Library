@@ -25,15 +25,17 @@ function SearchBook() {
 }, []);
 
   // Real-time updates
-  useEffect(() => {
-    socket.on("newBook", (book) => setBooks(prev => [...prev, book]));
-    socket.on("deleteBook", (bookId) => setBooks(prev => prev.filter(b => b.id !== bookId)));
 
-    return () => {
-      socket.off("newBook");
-      socket.off("deleteBook");
-    };
-  }, []);
+// Listen for new books
+useEffect(() => {
+  socket.on("newBook", (book) => setBooks(prev => [...prev, book]));
+  socket.on("deleteBook", (bookId) => setBooks(prev => prev.filter(b => b.id !== bookId)));
+
+  return () => {
+    socket.off("newBook");
+    socket.off("deleteBook");
+  };
+}, []);
 
   const filteredBooks = books.filter(book =>
     book.title.toLowerCase().includes(searchTerm.toLowerCase())

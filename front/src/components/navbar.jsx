@@ -47,7 +47,7 @@ const Navbar = () => {
               <li className="nav-item ms-5"> <Link className="nav-link" to="/Dashboard" style={{ whiteSpace: 'nowrap', fontSize: '18px' }}> DashBoard </Link></li>
             <li className="nav-item ms-5"> <Link className="nav-link" to="/add-book" style={{ whiteSpace: 'nowrap', fontSize: '18px' }}> Add Book </Link></li>
 
-            <li className="nav-item dropdown">
+            {/* <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -61,7 +61,7 @@ const Navbar = () => {
                 <li><a className="dropdown-item" href="/staffreg">Staff Registration</a></li>
                  <li><a className="dropdown-item" href="/studentreg">Student Registration</a></li>
               </ul>
-            </li>
+            </li> */}
 
             <li className="nav-item">
   <Link
