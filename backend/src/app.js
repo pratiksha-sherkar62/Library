@@ -28,6 +28,9 @@ app.use('/api/user', userRoutes);
 const adminRoutes = require('./routes/adminRoutes');
 app.use('/api/admin', adminRoutes);
 
+const profileRoutes = require('./routes/profileRoutes');
+app.use('/api/profile', profileRoutes);
+
 // Health check
 app.get('/', (req, res) => res.send('Backend running!'));
 
