@@ -30,7 +30,7 @@ function UserRegister() {
         localStorage.setItem("token", response.data.token);
 
         alert("✅ Registration successful!");
-        navigate("/userhome");
+        navigate("/Userlog");
       } else {
         alert("❌ " + (response.data.message || "Registration failed."));
       }
@@ -102,7 +102,7 @@ function UserRegister() {
           <span
             className="text-gradient fw-bold"
             style={{ cursor: "pointer" }}
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/Userlog")}
           >
             Login here
           </span>
