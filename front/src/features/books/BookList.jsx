@@ -43,12 +43,19 @@ function BookList() {
   const updateBook = async (book) => {
     const updatedTitle = prompt("Enter new title:", book.title);
     const updatedAuthor = prompt("Enter new author:", book.author);
+    const updatedISBN = prompt("Enter new ISBN:", book.isbn);
+    const updatedCopies = prompt("Enter total copies:", book.copies_total);
+    const updatedAvailable = prompt("Enter available copies:", book.copies_available);
+
     if (!updatedTitle || !updatedAuthor) return;
 
     try {
       await axios.put(`http://localhost:5000/api/books/${book.id}`, {
         title: updatedTitle,
         author: updatedAuthor,
+        isbn: updatedISBN,
+        copies_total: updatedCopies,
+        copies_available: updatedAvailable,
       });
       fetchBooks();
     } catch (err) {
@@ -60,7 +67,8 @@ function BookList() {
   const filteredBooks = books.filter(
     (book) =>
       book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      book.author.toLowerCase().includes(searchQuery.toLowerCase())
+      book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (book.isbn && book.isbn.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   if (loading) return <p className="text-center mt-5">Loading books...</p>;
@@ -75,7 +83,7 @@ function BookList() {
           <input
             type="text"
             className="form-control"
-            placeholder="🔍 Search by title or author..."
+            placeholder="🔍 Search by title, author, or ISBN..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -92,6 +100,9 @@ function BookList() {
                   <th>Image</th>
                   <th>Title</th>
                   <th>Author</th>
+                  <th>ISBN</th>
+                  <th>Total Copies</th>
+                  <th>Available</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -112,6 +123,9 @@ function BookList() {
                     </td>
                     <td>{book.title}</td>
                     <td>{book.author}</td>
+                    <td>{book.isbn || "N/A"}</td>
+                    <td>{book.copies_total || 0}</td>
+                    <td>{book.copies_available || 0}</td>
                     <td className="d-flex justify-content-center flex-wrap gap-2">
                       <button
                         className="btn btn-sm btn-primary"

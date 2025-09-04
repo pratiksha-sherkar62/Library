@@ -42,7 +42,7 @@ useEffect(() => {
   );
 
   return (
-    <div className="searchbook-page d-flex">
+    <div className="searchbook-page d-flex" style={{marginLeft:"200px"}}>
       {/* Sidebar */}
       <div className={`sidebar-container ${isSidebarOpen ? "open" : "closed"}`}>
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />

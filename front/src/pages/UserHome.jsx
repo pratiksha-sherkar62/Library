@@ -9,7 +9,7 @@ const UserHome = () => {
   };
 
   return (
-    <div style={{ display: "flex" ,minHeight: "84vh" }}>
+    <div style={{ display: "flex" ,minHeight: "84vh",paddingLeft:"200px" }}>
       {/* Sidebar only once */}
       <div style={{ width: isOpen ? "15%" : "0", transition: "width 0.3s" }}>
         <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
@@ -23,5 +23,6 @@ const UserHome = () => {
     </div>
   );
 };
+
 
 export default UserHome;

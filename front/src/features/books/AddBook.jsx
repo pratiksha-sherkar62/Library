@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +8,9 @@ function AddBook() {
   const [formData, setFormData] = useState({
     title: "",
     author: "",
+    isbn: "",
+    copies_total: "",
+    copies_available: "",
   });
   const [image, setImage] = useState(null);
 
@@ -34,6 +36,9 @@ function AddBook() {
       const data = new FormData();
       data.append("title", formData.title);
       data.append("author", formData.author);
+      data.append("isbn", formData.isbn);
+      data.append("copies_total", formData.copies_total);   // ✅ fixed
+      data.append("copies_available", formData.copies_available);
       if (image) data.append("image", image);
 
       const res = await axios.post("http://localhost:5000/api/books/add", data, {
@@ -77,10 +82,41 @@ function AddBook() {
             />
           </div>
           <div className="mb-3">
+            <input
+              type="text"
+              name="isbn"
+              className="form-control"
+              placeholder="ISBN"
+              value={formData.isbn}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              name="copies_total"
+              className="form-control"
+              placeholder="Copies Total"
+              value={formData.copies_total}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              name="copies_available"
+              className="form-control"
+              placeholder="Copies Available"
+              value={formData.copies_available}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
             <label className="form-label">Upload Book Image:</label>
-            <input type="file"
-                    name="image"   // ✅ must match upload.single("image")
-                    onChange={handleImageChange}
+            <input
+              type="file"
+              name="image" // ✅ must match multer field
+              onChange={handleImageChange}
             />
           </div>
           <button type="submit" className="btn btn-gradient w-100">

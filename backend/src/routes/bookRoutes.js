@@ -1,10 +1,12 @@
-
-// bookRoute : 
 const express = require("express");
 const multer = require("multer");
 const fs = require("fs");
-const { addBook } = require("../controllers/bookController");
-const { getDB } = require("../config/db");
+const {
+  addBook,
+  getBooks,
+  updateBook,
+  deleteBook,
+} = require("../controllers/bookController");
 
 const router = express.Router();
 
@@ -20,18 +22,18 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// POST /api/books/add
+// ========== ROUTES ==========
+
+// Add new book
 router.post("/add", upload.single("image"), addBook);
 
-router.get("/", async (req, res) => {
-  try {
-    const db = getDB();
-    const [rows] = await db.execute("SELECT * FROM books");
-    res.json({ books: rows });
-  } catch (err) {
-    console.error("Error fetching books:", err);
-    res.status(500).json({ message: "Server error", error: err.message });
-  }
-});
+// Get all books
+router.get("/", getBooks);
+
+// Update book (with optional new image)
+router.put("/:id", upload.single("image"), updateBook);
+
+// Delete book
+router.delete("/:id", deleteBook);
 
 module.exports = router;
