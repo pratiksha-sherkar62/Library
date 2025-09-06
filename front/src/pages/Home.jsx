@@ -114,7 +114,8 @@ const Home = () => {
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front text-center fa-3x mb-3">
-            👩‍🎓 <h4 className="mt-7">Students</h4>
+            👩‍🎓 
+            <h4 className="mt-7">Student Management</h4>
           </div>
           <div class="flip-card-back text-center">
             <p>Manage student accounts, profiles, and borrowing history.</p>

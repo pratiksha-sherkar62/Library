@@ -17,16 +17,16 @@ exports.getAllBooks = async () => {
   return rows;
 };
 
-exports.deleteBook = async (id) => {
+exports.deleteBook = async (bookId) => {
   const db = getDB();
-  await db.query('DELETE FROM books WHERE id = ?', [id]);
+  await db.query('DELETE FROM books WHERE id = ?', [bookId]);
 };
 
-exports.updateBook = async (id, book) => {
+exports.updateBook = async (bookIdd, book) => {
   const db = getDB();
   const { title, author, year, quantity, status } = book;
   await db.query(
     'UPDATE books SET title = ?, author = ?, year = ?, quantity = ?, status = ? WHERE id = ?',
-    [title, author, year, quantity, status, id]
+    [title, author, year, quantity, status, bookId]
   );
 };

@@ -3,11 +3,13 @@ const { getDB } = require("../config/db");
 
 const User = {
   create: async (userData) => {
-    const db = getDB(); // call here, not at import
-    const { name, email, password } = userData;
+    const db = getDB(); // ✅ Call inside function
+    const { userId, name, phone, email, role, password, photo } = userData;
+
     const [result] = await db.query(
-      "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-      [name, email, password]
+      `INSERT INTO users (userId, name, phone, email, role, password, photo) 
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [userId, name, phone, email, role, password, photo]
     );
     return result;
   },
@@ -15,7 +17,13 @@ const User = {
   findByEmail: async (email) => {
     const db = getDB();
     const [rows] = await db.query("SELECT * FROM users WHERE email = ?", [email]);
-    return rows;
+    return rows[0]; // return single user if found
+  },
+
+  findByUserId: async (userId) => {
+    const db = getDB();
+    const [rows] = await db.query("SELECT * FROM users WHERE userId = ?", [userId]);
+    return rows[0];
   }
 };
 

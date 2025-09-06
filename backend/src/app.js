@@ -15,14 +15,14 @@ app.use(cors({
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve uploads
+// Serve uploads folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 const bookRoutes = require('./routes/bookRoutes');
 app.use('/api/books', bookRoutes);
 
-const userRoutes = require('./routes/userRoutes'); // Only declared once
+const userRoutes = require('./routes/userRoutes');
 app.use('/api/user', userRoutes);
 
 const adminRoutes = require('./routes/adminRoutes');

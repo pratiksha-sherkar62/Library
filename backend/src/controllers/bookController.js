@@ -25,7 +25,7 @@ exports.addBook = async (req, res) => {
     ]);
 
     const newBook = {
-      id: result.insertId,
+      bookId: result.insertId,
       title,
       author,
       isbn,
@@ -58,7 +58,7 @@ exports.getBooks = async (req, res) => {
 // ================= UPDATE BOOK =================
 exports.updateBook = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { bookId } = req.params;
     const { title, author, isbn, copies_total, copies_available } = req.body;
 
     if (!title || !author) {
@@ -69,15 +69,16 @@ exports.updateBook = async (req, res) => {
     const query = `
       UPDATE books 
       SET title = ?, author = ?, isbn = ?, copies_total = ?, copies_available = ?
-      WHERE id = ?
+      WHERE bookId = ?
     `;
     const [result] = await db.execute(query, [
-      title,
+        bookId,
+        title,
       author,
       isbn,
       copies_total,
-      copies_available,
-      id,
+      copies_available
+    
     ]);
 
     if (result.affectedRows === 0) {
@@ -94,10 +95,13 @@ exports.updateBook = async (req, res) => {
 // ================= DELETE BOOK =================
 exports.deleteBook = async (req, res) => {
   try {
-    const { id } = req.params;
-    const db = getDB();
+    const { id } = req.params; // <-- must come from URL /:id
+    if (!id) {
+      return res.status(400).json({ message: "Book ID is required" });
+    }
 
-    const [result] = await db.execute("DELETE FROM books WHERE id = ?", [id]);
+    const db = getDB();
+    const [result] = await db.execute("DELETE FROM books WHERE bookId = ?", [id]);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Book not found" });
@@ -109,3 +113,28 @@ exports.deleteBook = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
+// ================= REQUEST BOOK =================
+exports.requestBook = (req, res) => {
+  const { bookId, userId } = req.body;
+
+  // Check availability first
+  const checkQuery = "SELECT copies_available FROM books WHERE id=?";
+  db.query(checkQuery, [bookId], (err, result) => {
+    if (err) return res.status(500).json({ error: err });
+
+    if (result[0].copies_available > 0) {
+      // Reduce available copies
+      const updateQuery = "UPDATE books SET copies_available = copies_available - 1 WHERE id=?";
+      db.query(updateQuery, [bookId], (err2) => {
+        if (err2) return res.status(500).json({ error: err2 });
+
+        // You can also insert into a "book_requests" table
+        res.json({ message: "Book requested successfully!" });
+      });
+    } else {
+      res.status(400).json({ message: "No copies available" });
+    }
+  });
+};
+

@@ -1,6 +1,8 @@
 const express = require("express");
 const multer = require("multer");
 const fs = require("fs");
+const path = require("path");
+const bookController = require("../controllers/bookController");
 const {
   addBook,
   getBooks,
@@ -10,10 +12,10 @@ const {
 
 const router = express.Router();
 
-// multer storage
+// Multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = "./uploads";
+    const dir = path.join(__dirname, "..", "uploads");
     if (!fs.existsSync(dir)) fs.mkdirSync(dir);
     cb(null, dir);
   },
@@ -22,18 +24,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// ========== ROUTES ==========
-
-// Add new book
+// Routes
 router.post("/add", upload.single("image"), addBook);
-
-// Get all books
 router.get("/", getBooks);
-
-// Update book (with optional new image)
 router.put("/:id", upload.single("image"), updateBook);
-
-// Delete book
 router.delete("/:id", deleteBook);
+router.post("/request", bookController.requestBook);
 
 module.exports = router;

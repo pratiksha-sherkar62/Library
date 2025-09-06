@@ -27,18 +27,18 @@ function BookList() {
     fetchBooks();
   }, []);
 
-  const deleteBook = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this book?")) return;
+  const deleteBook = async (bookId) => {
+  if (!window.confirm("Are you sure you want to delete this book?")) return;
 
-    try {
-      await axios.delete(`http://localhost:5000/api/books/${id}`);
-      setBooks(books.filter((book) => book.id !== id));
-      alert("Book deleted successfully!");
-    } catch (err) {
-      console.error("Error deleting book:", err);
-      setError("Failed to delete book. Please try again later.");
-    }
-  };
+  try {
+    await axios.delete(`http://localhost:5000/api/books/${bookId}`);
+    setBooks((prevBooks) => prevBooks.filter((book) => book.bookId !== bookId));
+    alert("Book deleted successfully!");
+  } catch (err) {
+    console.error("Error deleting book:", err);
+    setError("Failed to delete book. Please try again later.");
+  }
+};
 
   const updateBook = async (book) => {
     const updatedTitle = prompt("Enter new title:", book.title);
@@ -116,6 +116,7 @@ function BookList() {
                           src={`http://localhost:5000/uploads/${book.image}`}
                           alt={book.title}
                           className="book-image"
+                          style={{ width: "50px", height: "25px", objectFit: "cover"} }
                         />
                       ) : (
                         <span>No Image</span>
@@ -133,12 +134,13 @@ function BookList() {
                       >
                         Update
                       </button>
-                      <button
-                        className="btn btn-sm btn-danger"
-                        onClick={() => deleteBook(book.id)}
-                      >
-                        Delete
-                      </button>
+                    <button
+  className="btn btn-sm btn-danger"
+  onClick={() => deleteBook(book.bookId)} // ✅ use book.id
+>
+  Delete
+</button>
+
                     </td>
                   </tr>
                 ))}
