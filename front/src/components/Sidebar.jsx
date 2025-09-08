@@ -30,7 +30,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   return (
     <div className={`sidebar bg-light p-3 ${isOpen ? 'open' : 'closed'}`}>
       <button className="btn btn-primary mb-3 w-100" onClick={toggleSidebar}>
-        {isOpen ? <h4 className="text-primary">📚 Library</h4> : <FaBars size={20} />}
+        {isOpen ? <h4 className="text-primary">TechyLab</h4> : <FaBars size={20} />}
       </button>
 
       {/* {isOpen && <h4 className="text-primary">📚 Library</h4>} */}

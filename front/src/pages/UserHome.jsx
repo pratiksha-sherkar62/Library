@@ -18,7 +18,7 @@ const UserHome = () => {
       {/* Main content */}
       <div style={{ width : isOpen ? "100%" : "85%", flex: 1, padding: "20px" }}>
         <h1>Welcome to User Home</h1>
-        <p>This is the main content area.</p>
+       
       </div>
     </div>
   );
